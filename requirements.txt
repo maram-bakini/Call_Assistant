@@ -1,0 +1,10 @@
+langchain==0.3.7
+langchain-community==0.3.7
+langchain-core==0.3.19
+langchain-huggingface==0.1.2
+langchain-ollama==0.2.0
+langchain-text-splitters==0.3.2
+langchainhub==0.1.21
+ollama==0.4.1
+streamlit==1.40.1
+

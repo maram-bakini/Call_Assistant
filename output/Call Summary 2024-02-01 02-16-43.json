@@ -1,0 +1,17 @@
+{
+  "call_summary": "Customer had a flight canceled and was not offered alternative flights or compensation until after speaking with a supervisor.",
+  "key_takeaways": [
+    "Customer was not offered alternative flights or compensation initially",
+    "Supervisor apologized and offered a $200 travel voucher as an apology",
+    "ABC Travel will assess their internal procedures to prevent similar issues in the future"
+  ],
+  "follow_up_actions": [
+    "Train staff better on managing cancellations and rebookings",
+    "Implement better training around customer service",
+    "Follow up with the customer after booking a new trip to ensure satisfaction"
+  ],
+  "call_ID": "12345",
+  "CSR_ID": "JaneDoe123",
+  "call_date": "2024-02-01",
+  "call_time": "02:16:43"
+}

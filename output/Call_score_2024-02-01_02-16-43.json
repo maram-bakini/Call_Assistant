@@ -1,0 +1,54 @@
+{
+  "Communication_Skills": {
+    "score": "Medium",
+    "score_explanation": "The CSR communicated adequately but could have been more concise and used more empathetic language when addressing the customer's frustration."
+  },
+  "Problem_Resolution": {
+    "score": "High",
+    "score_explanation": "The CSR resolved the customer's issue by offering an immediate refund and finding an alternative flight that met the customer's needs."
+  },
+  "Product_Knowledge": {
+    "score": "High",
+    "score_explanation": "The CSR showed a strong understanding of the company's policies and was able to clearly explain the details of the flight refund process."
+  },
+  "Professionalism": {
+    "score": "High",
+    "score_explanation": "The CSR maintained a professional demeanor throughout the conversation, addressing the customer's concerns respectfully and patiently."
+  },
+  "Problem_Escalation": {
+    "score": "Medium",
+    "score_explanation": "The CSR acknowledged the issue but did not transfer the call to a supervisor until further prompting from the customer."
+  },
+  "Resolution_Follow_Up": {
+    "score": "High",
+    "score_explanation": "The CSR mentioned the follow-up procedure and confirmed that an email would be sent to the customer for further details."
+  },
+  "Efficiency": {
+    "score": "Medium",
+    "score_explanation": "The call was handled in a reasonable timeframe but included pauses to verify flight details, causing some delays."
+  },
+  "Adherence_to_Policies_and_Procedures": {
+    "score": "High",
+    "score_explanation": "The CSR accurately followed all company policies, ensuring that the refund and rebooking were processed correctly."
+  },
+  "Technical_Competence": {
+    "score": "Medium",
+    "score_explanation": "The CSR navigated the systems well but took longer than expected to find the necessary information for the refund."
+  },
+  "Customer_Satisfaction": {
+    "score": "High",
+    "score_explanation": "The customer expressed appreciation for the quick response and the options provided, despite initial frustration."
+  },
+  "Language_Proficiency": {
+    "score": "High",
+    "score_explanation": "The CSR used clear and professional language throughout the call, ensuring that the customer understood the process."
+  },
+  "Conflict_Resolution": {
+    "score": "Medium",
+    "score_explanation": "The CSR managed the customer's irritation well, though some de-escalation techniques could have been more proactive."
+  },
+  "call_ID": "12345",
+  "CSR_ID": "JaneDoe123",
+  "call_date": "2024-02-01",
+  "call_time": "02:16:43"
+}
