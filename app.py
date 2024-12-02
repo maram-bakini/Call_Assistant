@@ -1,54 +1,70 @@
 import streamlit as st
-from langchain.prompts import PromptTemplate
 from langchain_ollama import ChatOllama
-from langchain.chains import LLMChain
+from Summarizer import TranscriptSummarizerPage  # Assuming the class is in `transcript_summarizer_page.py`
+from evaluation import CallAssessmentPage  # Assuming the class is in `call_assessment_page.py`
 
+# Initialize the CallAssessmentPage
+assessment_page = CallAssessmentPage()
 
-
-
-# --- Streamlit Configuration ---
-st.set_page_config(page_title="AI-Powered Clinical Tools", layout="wide")
-st.title("🏥 AI-Powered Clinical Tools")
-st.sidebar.title("Navigation")
-
-app_mode = st.sidebar.selectbox(
-    "Choose a Tool",
-    [
-        "Home",
-        "Clinical Documentation Assistant",
-        "Research Paper Summarizer",
-        "Heart Disease QA Chatbot",
-    ]
-)
-
-
-if app_mode == "Home":
-    st.markdown("""
-    ### Welcome to AI-Powered Clinical Tools!
-    - **Clinical Documentation Assistant**: Automatically generate structured notes (SOAP notes).
-    - **Research Paper Summarizer**: Extract key insights from dense research papers.
-    - **Heart Disease QA Chatbot**: Answer questions related to heart disease based on curated documents.
-    """)
-    
-
-
+# Initialize the summarizer page
+summarizer_page = TranscriptSummarizerPage()
 llm = ChatOllama(model="llama3.2", temperature=0)
-chain = LLMChain(
-            llm=llm,
-            prompt=PromptTemplate(
-                input_variables=["text"],
-                template="Generate a SOAP note from the following clinical details:\n\n{text}"
-            )
+
+def main():
+    # --- Streamlit Configuration ---
+    st.set_page_config(
+        page_title="AI-Powered Customer Support Tools", 
+        layout="wide", 
+        page_icon="💼"
+    )
+    st.title("💼 AI-Powered Customer Support Tools")
+    st.sidebar.title("Navigation")
+
+    # Sidebar navigation
+    app_mode = st.sidebar.radio(
+        "Choose a Tool:",
+        [
+            "Home",
+            "Call Transcript Summarizer",
+            "Call Assessment",
+            "Customer Feedback Analyzer",
+        ]
+    )
+
+    if app_mode == "Home":
+        st.markdown("""
+        ## Welcome to AI-Powered Customer Support Tools!
+        
+        Streamline your customer support operations with cutting-edge AI solutions:
+        
+        - **Call Transcript Summarizer**: Summarize and extract actionable insights from customer calls.
+        - **Customer Feedback Analyzer**: Gain insights into customer sentiment and preferences from feedback.
+        - **Chatbot Optimization Advisor**: Improve your chatbot's effectiveness through AI analysis.
+        """)
+        
+        st.image("https://source.unsplash.com/1200x300/?customer-support", caption="Empowering Support Teams")
+        st.info(
+            "💡 Tip: Use these tools to enhance customer satisfaction, reduce response times, and improve support team efficiency."
         )
 
-st.header("📝 Clinical Documentation Assistant")
-user_input = st.text_area("Enter or paste clinical details here:")
-if st.button("Generate SOAP Note"):
-    
-    if user_input:
-        soap_note = chain.run({"text": user_input})
-        st.subheader("Generated SOAP Note:")
-        st.text_area("SOAP Note Output", soap_note, height=300)
-        st.download_button("Download SOAP Note", data=soap_note, file_name="SOAP_Note.txt")
-    else:
-        st.warning("Please provide clinical details.")
+    elif app_mode == "Call Transcript Summarizer":
+        st.header("📞 Call Transcript Summarizer")
+        st.markdown("""
+        Use this tool to quickly analyze customer call transcripts. The AI generates:
+        - A concise **summary** of the call.
+        - Key **takeaways** to share with your team.
+        - Follow-up **action items** to ensure nothing is missed.
+        """)
+        summarizer_page.run()
+    elif app_mode == "Call Assessment":
+        assessment_page.run()
+        
+    elif app_mode == "Customer Feedback Analyzer":
+        st.header("📊 Customer Feedback Analyzer")
+        st.markdown("""
+        This feature is coming soon! Stay tuned for AI-driven insights from customer reviews and feedback.
+        """)
+        st.warning("🚧 Under Development 🚧")
+
+if __name__ == "__main__":
+    main()
