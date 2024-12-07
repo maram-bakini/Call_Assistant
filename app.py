@@ -26,8 +26,7 @@ def main():
         [
             "Home",
             "Call Transcript Summarizer",
-            "Call Assessment",
-            "Customer Feedback Analyzer",
+            "Call Assessment"
         ]
     )
 
@@ -58,13 +57,8 @@ def main():
         summarizer_page.run()
     elif app_mode == "Call Assessment":
         assessment_page.run()
+    
         
-    elif app_mode == "Customer Feedback Analyzer":
-        st.header("📊 Customer Feedback Analyzer")
-        st.markdown("""
-        This feature is coming soon! Stay tuned for AI-driven insights from customer reviews and feedback.
-        """)
-        st.warning("🚧 Under Development 🚧")
 
 if __name__ == "__main__":
     main()

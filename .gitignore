@@ -1,3 +1,8 @@
 project
 __pycache__
-
+.streamlit
+data
+output
+.env
+requirements.txt
+Recording.mp3

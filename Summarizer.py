@@ -7,10 +7,15 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.output_parsers import PydanticOutputParser
 from langchain_ollama import ChatOllama
 from langchain.chains import LLMChain
+from Model_setup import LLMHandler
+
+llm_handler = LLMHandler()
+llm = llm_handler.get_llm()
 
 class TranscriptSummarizerPage:
     def __init__(self, model_name="llama3.2", temperature=0):
-        self.llm = ChatOllama(model=model_name, temperature=temperature)
+        self.llm = llm
+        #ChatOllama(model=model_name, temperature=temperature)
         self.summarization_parser = PydanticOutputParser(pydantic_object=self.CallSummary)
         self.summarization_prompt = ChatPromptTemplate.from_template(
             """
@@ -47,7 +52,6 @@ class TranscriptSummarizerPage:
             return ""
 
     def run(self):
-        st.title("Call Transcript Summarizer")
 
         # File uploader widget
         uploaded_file = st.file_uploader("Upload a call transcript (JSON format):", type="json")

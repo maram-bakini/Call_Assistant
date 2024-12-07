@@ -118,7 +118,7 @@ class CallAssessmentPage:
         json_transcript = json.loads(transcript)
         call_transcript = "\n".join(json_transcript.get("call_transcript", []))
         return f"Call Transcript:\n{call_transcript}"
-
+    
     def _extract_content(self, message):
         """
         Extracts the content from the message, converting it to a string if necessary.
