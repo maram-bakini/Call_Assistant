@@ -7,23 +7,20 @@ from langchain.output_parsers import PydanticOutputParser
 from langchain_ollama import ChatOllama
 from langchain_core.runnables import RunnableLambda
 from enum import Enum
+from Model_setup import LLMHandler
+from langchain_core.output_parsers import JsonOutputParser
+
+llm_handler = LLMHandler()
+llm = llm_handler.get_llama_groq()
 
 
-class ScoreValue(Enum):
-    
-    High = "High"
-    Medium = "Medium"
-    Low = "Low"
-    
-class Score(BaseModel):
-        score: ScoreValue
-        score_explanation: str
+
 
 class CallAssessmentPage:
     def __init__(self, model_name="llama3.2", temperature=0):
-        self.llm = ChatOllama(model=model_name, temperature=temperature)
+        self.llm = llm
+        #ChatOllama(model=model_name, temperature=temperature)
 
-        # Define the one-shot example
         self.one_shot_example = """
         Evaluation:
 {{
@@ -78,9 +75,8 @@ class CallAssessmentPage:
 }}
         """
 
-        # Prompt template with one-shot example
         self.assessment_template = f"""
-        {{{{call_transcript}}}}
+        {{call_transcript}}
 
         {self.one_shot_example}
         Now evaluate the given call transcript and provide the output in the same format as the example.
@@ -89,28 +85,10 @@ class CallAssessmentPage:
         """
         self.assessment_prompt = ChatPromptTemplate.from_template(self.assessment_template)
 
-        # Define processing functions
         self.process_transcript = RunnableLambda(self._process_transcript)
         self.extract_content = RunnableLambda(self._extract_content)
-
+        self.parser = JsonOutputParser()
    
-
-
-
-    class Evaluation(BaseModel):
-        Communication_Skills: Score
-        Problem_Resolution: Score
-        Product_Knowledge: Score
-        Professionalism: Score
-        Problem_Escalation: Score
-        Resolution_Follow_Up: Score
-        Efficiency: Score
-        Adherence_to_Policies_and_Procedures: Score
-        Technical_Competence: Score
-        Customer_Satisfaction: Score
-        Language_Proficiency: Score
-        Conflict_Resolution: Score
-
     def _process_transcript(self, transcript: str) -> str:
         """
         Extracts and formats the call transcript from the input JSON.
@@ -125,44 +103,50 @@ class CallAssessmentPage:
         """
         if hasattr(message, 'content') and isinstance(message.content, str):
             return message.content
-        return str(message)  # Fallback to string conversion
-
+        return str(message)  
     def run(self):
-        st.title("📈 Call Assessment Tool")
-        st.markdown("""
-        Use this tool to automatically evaluate customer service calls based on multiple criteria.
-        Upload a call transcript in JSON format, and the AI will analyze it and provide structured feedback.
-        """)
+      
+      st.title("📈 Call Assessment Tool")
+      st.markdown("""
+    Use this tool to automatically evaluate customer service calls based on multiple criteria.
+    Upload a call transcript in JSON format, and the AI will analyze it and provide structured feedback.
+    """)
 
-        # File uploader
-        uploaded_file = st.file_uploader("Upload a call transcript (JSON format):", type="json")
+      uploaded_file = st.file_uploader("Upload a call transcript (JSON format):", type="json")
 
-        if uploaded_file:
-            try:
-                # Read the uploaded file
-                transcript = uploaded_file.read().decode("utf-8")
+      if uploaded_file:
+        
+        try:
+          
+          transcript = uploaded_file.read().decode("utf-8")
 
-                # Construct the assessment chain
-                assessment_chain = (
-                    {"transcript": self.process_transcript}
-                    | self.assessment_prompt
-                    | self.llm
-                    | self.extract_content
-                )
+          assessment_chain = (
+                {"call_transcript": self.process_transcript}
+                | self.assessment_prompt
+                | self.llm
+                | self.extract_content
+                | self.parser
+            )
 
-                # Run the chain
-                call_assessment = assessment_chain.invoke(transcript)
-                parsed_evaluation = self.Evaluation.parse_raw(call_assessment)
+          call_assessment = assessment_chain.invoke(transcript)
 
-                # Display results
-                st.subheader("Call Evaluation Results")
-                for category, score in parsed_evaluation.dict().items():
-                    st.markdown(f"### {category}")
-                    st.write(f"**Score:** {score['score']}")
-                    st.write(f"**Explanation:** {score['score_explanation']}")
+          if isinstance(call_assessment, dict):
+            
+            st.subheader("Call Evaluation Results")
 
-            except Exception as e:
-                st.error("An error occurred while processing the file:")
-                st.text(e)
-        else:
-            st.info("Please upload a JSON file to begin.")
+            for category, details in call_assessment.items():
+              
+              
+              st.markdown(f"### {category}")
+              st.write(f"**Score:** {details.get('score', 'N/A')}")
+              st.write(f"**Explanation:** {details.get('score_explanation', 'N/A')}")
+              
+          else:
+            st.error("The AI output was not in the expected format. Please check the input and try again.")
+
+        except Exception as e:
+            st.error("An error occurred while processing the file:")
+            st.text(str(e))
+      else:
+        
+        st.info("Please upload a JSON file to begin.")

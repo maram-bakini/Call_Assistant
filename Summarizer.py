@@ -8,80 +8,93 @@ from langchain.output_parsers import PydanticOutputParser
 from langchain_ollama import ChatOllama
 from langchain.chains import LLMChain
 from Model_setup import LLMHandler
+from langchain_core.output_parsers import JsonOutputParser
+
 
 llm_handler = LLMHandler()
-llm = llm_handler.get_llm()
+llm = llm_handler.get_llama_groq()
 
 class TranscriptSummarizerPage:
-    def __init__(self, model_name="llama3.2", temperature=0):
+    def __init__(self):
         self.llm = llm
         #ChatOllama(model=model_name, temperature=temperature)
-        self.summarization_parser = PydanticOutputParser(pydantic_object=self.CallSummary)
+        self.output_schema = {
+    "properties": {
+        "call_summary": {
+            "description": "Call transcript summary: ",
+            "title": "Call Summary",
+            "type": "string"
+        },
+        "key_takeaways": {
+            "description": "Call transcript key takeaways: ",
+            "items": {"type": "string"},
+            "title": "Key Takeaways",
+            "type": "array"
+        },
+        "follow_up_actions": {
+            "description": "Call transcript key action items: ",
+            "items": {"type": "string"},
+            "title": "Follow Up Actions",
+            "type": "array"
+        }
+    },
+    "required": ["call_summary", "key_takeaways", "follow_up_actions"]
+}
+        self.summarization_template = """
+
+Please provide a summary of the following call transcript provided between <transcript></transcript> tags. 
+Capture key takeaways and specific follow-up actions. 
+Skip the preamble and go straight to the answer.
+
+<transcript>{transcript}</transcript>
+
+
+Format your response using the following JSON schema:
+{output_schema}
+
+Place your response between <output></output> tags.
+"""
+        self.parser = JsonOutputParser()
+ 
+
         self.summarization_prompt = ChatPromptTemplate.from_template(
-            """
-            Please provide a summary of the following call transcript provided between <transcript></transcript> tags. 
-            Capture key takeaways and specific follow up actions. 
-            Skip the preamble and go straight to the answer.
-
-            <transcript>{transcript}</transcript>
-
-            Format your response per the instructions below: 
-            {format_instructions} 
-
-            dont show the properties of the instructions 
-            Place your response between <output></output> tags. 
-            """,
-            partial_variables={
-                "format_instructions": self.summarization_parser.get_format_instructions()
-            },
-        )
-
-    class CallSummary(BaseModel):
-        call_summary: str = Field(description="Call transcript summary: ")
-        key_takeaways: List[str] = Field(description="Call transcript key takeaways: ")
-        follow_up_actions: List[str] = Field(description="Call Transcript key action items: ")
-
-    @staticmethod
-    def extract_from_xml_tag(response: str, tag: str) -> str:
-        tag_txt = re.search(rf'<{tag}>(.*?)</{tag}>', response, re.DOTALL)
-        if tag_txt:
-            return tag_txt.group(1)
-        else:
-            st.error("No JSON found in the response.")
-            st.text(response)
-            return ""
+        self.summarization_template,
+    partial_variables={
+        "output_schema": self.output_schema,
+        },
+)
+   
 
     def run(self):
-
-        # File uploader widget
         uploaded_file = st.file_uploader("Upload a call transcript (JSON format):", type="json")
 
         if uploaded_file is not None:
             try:
-                # Load and read the transcript
                 transcript = uploaded_file.read().decode("utf-8")
-
-                # Set up the LLMChain with the template and model
-                chain = LLMChain(
-                    llm=self.llm,
-                    prompt=self.summarization_prompt,
-                )
-
+                
+                chain = chain= ( self.summarization_prompt
+    | self.llm
+    | self.parser
+)
+               # i have to add a function here which also call an llm and make sure the output is json formatted so it 
+               # can be parsed correctly and avoid errors
                 # Run the chain and get the response
-                response = chain.run(transcript=transcript)
-                json_output = self.extract_from_xml_tag(response, "output")
-
-                # Parse the output into structured data
+                response = chain.invoke(transcript)
+                
+                desired_response = {
+    'call_summary': response['output'].get('call_summary'),
+    'key_takeaways': response['output'].get('key_takeaways'),
+    'follow_up_actions': response['output'].get('follow_up_actions'),
+}
                 try:
-                    summary = self.summarization_parser.parse(json_output)
+                    
                     st.subheader("Call Summary")
-                    st.write(summary.call_summary)
-
+                    st.write(desired_response['call_summary'])
                     st.subheader("Key Takeaways")
-                    st.write("- " + "\n- ".join(summary.key_takeaways))
+                    st.write("- " + "\n- ".join(desired_response["key_takeaways"]))
 
                     st.subheader("Follow Up Actions")
-                    st.write("- " + "\n- ".join(summary.follow_up_actions))
+                    st.write("- " + "\n- ".join(desired_response["follow_up_actions"]))
                 except ValidationError as e:
                     st.error("Error parsing response from the model:")
                     st.text(e)

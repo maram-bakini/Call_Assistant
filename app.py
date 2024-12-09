@@ -1,5 +1,4 @@
 import streamlit as st
-from langchain_ollama import ChatOllama
 from Summarizer import TranscriptSummarizerPage  # Assuming the class is in `transcript_summarizer_page.py`
 from evaluation import CallAssessmentPage  # Assuming the class is in `call_assessment_page.py`
 
@@ -8,7 +7,6 @@ assessment_page = CallAssessmentPage()
 
 # Initialize the summarizer page
 summarizer_page = TranscriptSummarizerPage()
-llm = ChatOllama(model="llama3.2", temperature=0)
 
 def main():
     # --- Streamlit Configuration ---
