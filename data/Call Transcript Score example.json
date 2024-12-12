@@ -1,1 +1,40 @@
-{"Communication_Skills":{"score":"Medium","score_explanation":"The CSR communicated clearly overall, but could have been more concise at times. They demonstrated some empathy, but could have been more understanding towards the frustrated customer."},"Problem_Resolution":{"score":"High","score_explanation":"The CSR effectively resolved the customer's issues with booking the flights and answered all questions accurately."},"Product_Knowledge":{"score":"High","score_explanation":"The CSR demonstrated strong knowledge of flight options, seating classes, and amenities."},"Professionalism":{"score":"High","score_explanation":"The CSR maintained a courteous, professional tone despite the customer's frustration."},"Problem_Escalation":{"score":"Medium","score_explanation":"No need to escalate this call, but the CSR did not explicitly offer escalation if needed."},"Resolution_Follow_Up":{"score":"High","score_explanation":"The CSR provided booking confirmation and follow-up details at the end of the call."},"Efficiency":{"score":"Medium","score_explanation":"The booking took a reasonable amount of time, but the process could have been more efficient."},"Adherence_to_Policies_and_Procedures":{"score":"High","score_explanation":"The CSR followed proper procedures in booking the flights."},"Technical_Competence":{"score":"High","score_explanation":"The CSR competently navigated the booking systems and processes."},"Customer_Satisfaction":{"score":"Medium","score_explanation":"The customer seemed partially satisfied but expressed some frustration with the process."},"Language_Proficiency":{"score":"High","score_explanation":"The CSR used clear, easily understandable language."},"Conflict_Resolution":{"score":"Medium","score_explanation":"The CSR attempted to resolve the customer's frustrations but could have employed more de-escalation techniques."},"call_ID":"12345","CSR_ID":"JSmith123","call_date":"2024-02-05","call_time":"23:08:03","llm_model":"anthropic.claude-v2"}
+{
+    "call_transcript": [
+      "CSR: Good morning! Thank you for calling Techify Support. My name is Sarah. How may I assist you today?",
+      "Customer: Hi, Sarah. I’m having trouble with my laptop. It keeps shutting down unexpectedly.",
+      "CSR: I’m sorry to hear that! Could you let me know when this issue started?",
+      "Customer: It started about two weeks ago, but it’s become more frequent over the past few days.",
+      "CSR: Got it. Do you recall making any hardware or software changes before the issue began?",
+      "Customer: Well, I installed a new antivirus program around that time. Could that be the problem?",
+      "CSR: It’s possible. Sometimes new software can interfere with system processes. Let’s start by checking your laptop’s event logs. Do you know how to access them?",
+      "Customer: Not really. Can you guide me?",
+      "CSR: Of course! If you’re using Windows, press the Windows key, type 'Event Viewer,' and open it. Once it’s open, look under 'Windows Logs' and select 'System.' Do you see any errors listed there?",
+      "Customer: Okay, one moment. Yes, there are several errors listed. Most of them say something about a critical system failure.",
+      "CSR: Thank you for sharing that. Based on the errors, it could be a driver conflict or overheating issue. Let’s try updating your drivers first. Do you have an internet connection?",
+      "Customer: Yes, I do.",
+      "CSR: Great! Visit your laptop manufacturer’s website and navigate to the Support or Downloads section. Look for the latest drivers for your model and download them.",
+      "Customer: I’ll do that now. Should I update all the drivers?",
+      "CSR: It’s best to focus on your graphics, chipset, and power management drivers for now. Let me know once they’re installed.",
+      "Customer: Okay, I’ve updated the drivers. What’s next?",
+      "CSR: Let’s restart your laptop and see if the issue persists. Go ahead and restart, and I’ll stay on the line.",
+      "Customer: Alright, restarting now… Okay, it’s back on.",
+      "CSR: Perfect. Use your laptop for a few minutes as you normally would and let me know if it still shuts down.",
+      "Customer: I’ll do that. While I test, can you help me with another issue?",
+      "CSR: Absolutely. What else is going on?",
+      "Customer: My email client isn’t syncing with the server. I haven’t been able to send or receive emails since yesterday.",
+      "CSR: That’s frustrating. Could you tell me which email client you’re using and whether you’ve received any error messages?",
+      "Customer: I’m using Outlook, and the error message says, 'Cannot connect to the server.'",
+      "CSR: Let’s check your email account settings. Open Outlook, go to 'File,' and then 'Account Settings.' Under your email account, verify the incoming and outgoing server settings. They should match the details provided by your email provider.",
+      "Customer: Alright, I see the settings. The outgoing server is set to SMTP, but the port is different from what my provider suggests.",
+      "CSR: That could be the problem. Update the outgoing server port to the correct one, usually 587 or 465 for secure connections. Also, ensure that 'Use SSL' is enabled.",
+      "Customer: I’ve made the changes. Let me try sending a test email.",
+      "CSR: Sure, go ahead.",
+      "Customer: It worked! Thank you so much, Sarah.",
+      "CSR: You’re very welcome. How’s your laptop doing? Has it shut down again?",
+      "Customer: Nope, it’s been running smoothly so far.",
+      "CSR: That’s excellent to hear! If the issue reoccurs, feel free to reach out to us anytime. Is there anything else I can assist you with today?",
+      "Customer: No, that’s all for now. You’ve been very helpful. Thanks again!",
+      "CSR: It was my pleasure. Have a wonderful day!"
+    ]
+  }
+  
