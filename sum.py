@@ -5,7 +5,6 @@ import re
 from pydantic import  ValidationError
 from typing import List
 from langchain.prompts import ChatPromptTemplate
-from langchain_ollama import ChatOllama
 from langchain.chains import LLMChain
 from Model_setup import LLMHandler
 from langchain_core.output_parsers import JsonOutputParser

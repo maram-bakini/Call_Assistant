@@ -3,10 +3,10 @@ __pycache__
 .streamlit
 data
 output
+Notebooks\app.ipynb
 .env
 requirements.txt
 Recording.mp3
 project.code-workspace
-app.ipynb
 resources_sample-calls.mp3
 

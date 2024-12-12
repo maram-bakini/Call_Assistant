@@ -1,11 +1,9 @@
 import streamlit as st
 import json
 import re
-from pydantic import BaseModel, Field, ValidationError
+from pydantic import Field, ValidationError
 from typing import List
 from langchain.prompts import ChatPromptTemplate
-from langchain.output_parsers import PydanticOutputParser
-from langchain_ollama import ChatOllama
 from langchain.chains import LLMChain
 from Model_setup import LLMHandler
 from langchain_core.output_parsers import JsonOutputParser
