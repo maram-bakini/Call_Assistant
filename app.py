@@ -1,15 +1,13 @@
 import streamlit as st
-from Summarizer import TranscriptSummarizerPage  # Assuming the class is in `transcript_summarizer_page.py`
-from evaluation import CallAssessmentPage  # Assuming the class is in `call_assessment_page.py`
-
-# Initialize the CallAssessmentPage
+from Summarizer import TranscriptSummarizerPage  
+from evaluation import CallAssessmentPage 
+from extract_transcript import ExtractTranscript
 assessment_page = CallAssessmentPage()
 
-# Initialize the summarizer page
 summarizer_page = TranscriptSummarizerPage()
 
+
 def main():
-    # --- Streamlit Configuration ---
     st.set_page_config(
         page_title="AI-Powered Customer Support Tools", 
         layout="wide", 
@@ -18,28 +16,22 @@ def main():
     st.title("💼 AI-Powered Customer Support Tools")
     st.sidebar.title("Navigation")
 
-    # Sidebar navigation
     app_mode = st.sidebar.radio(
         "Choose a Tool:",
         [
             "Home",
             "Call Transcript Summarizer",
-            "Call Assessment"
+            "Call Assessment",
         ]
     )
 
     if app_mode == "Home":
-        st.markdown("""
-        ## Welcome to AI-Powered Customer Support Tools!
-        
+        st.markdown("""        
         Streamline your customer support operations with cutting-edge AI solutions:
-        
+
         - **Call Transcript Summarizer**: Summarize and extract actionable insights from customer calls.
-        - **Customer Feedback Analyzer**: Gain insights into customer sentiment and preferences from feedback.
-        - **Chatbot Optimization Advisor**: Improve your chatbot's effectiveness through AI analysis.
+        - **Call Evaluation**: automatically evaluate customer service calls.
         """)
-        
-        st.image("https://source.unsplash.com/1200x300/?customer-support", caption="Empowering Support Teams")
         st.info(
             "💡 Tip: Use these tools to enhance customer satisfaction, reduce response times, and improve support team efficiency."
         )
@@ -55,6 +47,7 @@ def main():
         summarizer_page.run()
     elif app_mode == "Call Assessment":
         assessment_page.run()
+
     
         
 
