@@ -27,5 +27,4 @@ This project implements an AI-powered solution that processes customer service (
 - **Speech-to-Text Models**: For converting audio files into text.
 - **Python**: For the main application logic.
 
-![AI Call Evaluation Workflow](images/image.png)
 
