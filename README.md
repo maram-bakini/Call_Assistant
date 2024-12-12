@@ -1,6 +1,6 @@
 # **Customer Service Call Evaluation and Summarization System**
 
-This project implements an AI-powered solution that processes customer service (CSR) call transcripts and generates a summary, key takeaways, follow-up actions, and evaluates the CSR's performance based on multiple criteria. The solution is capable of processing both JSON and audio call files, leveraging advanced natural language processing (NLP) and generative AI models to analyze and evaluate the call content.
+This project implements an AI-powered solution that processes customer service (CSR) call transcripts and generates a summary, key takeaways, follow-up actions, and evaluates the CSR's performance based on multiple criteria. The solution is capable of processing both JSON and audio call files generative AI models to analyze and evaluate the call content.
 
 ## **Table of Contents**
 1. [Overview](#overview)
