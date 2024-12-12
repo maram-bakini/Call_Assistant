@@ -1,1 +1,18 @@
-{"call_summary":"The customer called to book a roundtrip first class flight from LAX to Paris. The CSR assisted in finding flight options, confirmed the itinerary details, and booked the flights.","key_takeaways":["Customer was frustrated with the website and process.","Customer wanted first class tickets with extra legroom and meals.","Flights were booked LAX to Paris departing 14th at 7pm, returning Paris to LAX departing 21st at 3:45pm."],"follow_up_actions":["Email customer the flight itinerary and e-ticket numbers.","Charge $9,550 to card on file for ticket purchase."],"call_ID":"12345","CSR_ID":"JSmith123","call_date":"2024-02-05","call_time":"23:08:03","llm_model":"anthropic.claude-v2"}
+{
+    "call_transcript": [
+      "CSR: Good afternoon, this is Lily from Wellness Pharmacy. How can I assist you?",
+      "Customer: Hi, I need to refill my prescription for blood pressure medication, but I’m out of refills. What should I do?",
+      "CSR: Let me check your account. Could I have your name and date of birth?",
+      "Customer: It’s James Wilson, born March 12, 1980.",
+      "CSR: Thank you, Mr. Wilson. I see the prescription expired last month. I'll contact your doctor for a refill authorization. It may take 1-2 business days.",
+      "Customer: Can I get an emergency supply in the meantime?",
+      "CSR: Of course. I can provide a 3-day emergency supply. You can pick it up today. Is there anything else?",
+      "Customer: No, that’s great. Thanks for your help.",
+      "CSR: My pleasure. Your health is our priority. Have a wonderful day, Mr. Wilson!"
+    ],
+    "call_ID": "45678",
+    "CSR_ID": "LHarrison789",
+    "call_date": "2024-02-08",
+    "call_time": "12:45:22"
+  }
+  
